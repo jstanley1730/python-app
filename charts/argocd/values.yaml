@@ -1,0 +1,29 @@
+#argocd values
+global:
+  domain: argocd.test.com
+
+redis-ha:
+  enabled: false
+
+controller:
+  replicas: 1
+
+server:
+  replicas: 1
+  ingress:
+    enabled: true
+    annotations:
+      # nginx.ingress.kubernetes.io/force-ssl-redirect: "true"
+      # nginx.ingress.kubernetes.io/ssl-passthrough: "true"
+      nginx.ingress.kubernetes.io/backend-protocol: "HTTPS"
+    ingressClassName: nginx
+    tls: true
+
+repoServer:
+  replicas: 1
+applicationSet:
+
+  replicas: 1
+
+certificate:
+  enabled: true
