@@ -12,6 +12,9 @@ jobs:
   docker:
     runs-on: ubuntu-latest
     steps:
+      - name: Set short SHA
+        run: echo "SHORT_SHA=${GITHUB_SHA::6}" >> $GITHUB_ENV
+
       - name: Login to Docker Hub
         uses: docker/login-action@v4
         with:
@@ -21,4 +24,4 @@ jobs:
         uses: docker/build-push-action@v7
         with:
           push: true
-          tags: jstanley1730gmailcom/python-app:${{ github.sha }}
+          tags: jstanley1730gmailcom/python-app:${{ env.SHORT_SHA }}
