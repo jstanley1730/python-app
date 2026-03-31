@@ -4,7 +4,8 @@ on:
   push:
     paths:
       - src/**
-      - .github/workflows/**      
+      - .github/workflows/**
+      - charts/**
     branches:
       - main
 
