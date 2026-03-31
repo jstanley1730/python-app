@@ -27,7 +27,8 @@ def healthz():
 def hostname():
     return jsonify(
         {
-            'hostname': socket.gethostname()
+            'hostname': socket.gethostname(),
+            'message': 'hello from github'
         }
     ), 200
 
