@@ -11,7 +11,7 @@ on:
 
 jobs:
   docker:
-    runs-on: self-hosted
+    runs-on: ubuntu-latest
     steps:
       - name: Set short SHA
         run: echo "SHORT_SHA=${GITHUB_SHA::6}" >> $GITHUB_ENV
