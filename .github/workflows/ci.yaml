@@ -4,6 +4,7 @@ on:
   push:
     paths:
       - src/**
+      - .github/workflows/**      
     branches:
       - main
 
@@ -20,4 +21,4 @@ jobs:
         uses: docker/build-push-action@v7
         with:
           push: true
-          tags: jstanley1730gmailcom/python-app:${GITHUB_SHA::6}
+          tags: jstanley1730gmailcom/python-app:${{ github.sha }}
