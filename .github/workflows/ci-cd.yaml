@@ -54,10 +54,10 @@ jobs:
       - name: argocd app sync
         shell: bash
         run: |
-          argocd login ${{ vars.ARGOCD_HOST }} \
-          --insecure \
-          --grpc-web \
-          --username admin \
+          argocd login ${{ vars.ARGOCD_HOST }}\
+          --insecure\
+          --grpc-web\
+          --username admin\
           --password ${{ secrets.ARGOCD_PASSWORD }}
           argocd app sync ${{ vars.ARGOCD_APP }}
 
