@@ -42,11 +42,13 @@ jobs:
         run: |
           curl -ksSL -o argocd ${{ vars.ARGOCD_HOST }}/download/argocd-linux-amd64
           chmod +x argocd
-          sudo mv ./argocd /usr/local/bin/argocd
-          export PATH=$PATH:/usr/local/bin
+          argocd version
           argocd login ${{ vars.ARGOCD_HOST }} \
           --insecure \
           --grpc-web \
           --username admin \
           --password ${{ secrets.ARGOCD_PASSWORD }}
           argocd app sync ${{ vars.ARGOCD_APP }}
+
+# sudo mv ./argocd /usr/local/bin/argocd
+# export PATH=$PATH:/usr/local/bin
