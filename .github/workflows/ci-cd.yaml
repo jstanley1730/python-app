@@ -40,7 +40,7 @@ jobs:
       - name: install argocd cli and sync
         shell: bash
         run: |
-          curl -ksSL -o argocd ${{ vars.ARGOCD_HOST }}/download/argocd-linux-${{ vars.HOST_ARCH }}
+          curl -ksSL -o argocd https://${{ vars.ARGOCD_HOST }}/download/argocd-linux-${{ vars.HOST_ARCH }}
           chmod +x argocd
           sudo mv ./argocd /usr/local/bin/argocd
           export PATH=$PATH:/usr/local/bin
