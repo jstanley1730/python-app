@@ -44,7 +44,6 @@ jobs:
           chmod +x argocd
           sudo mv ./argocd /usr/local/bin/argocd
           export PATH=$PATH:/usr/local/bin
-          argocd version
 
       - name: argocd app sync
         shell: bash
