@@ -36,14 +36,20 @@ jobs:
   cd:
     runs-on: self-hosted
     needs: ci
+    env:
+      SHORT_SHA: ${{ needs.ci.outputs.short_sha }}
     steps:
+      - name: update values with generated image tag
+        shell: bash
+        run: |
+          echo ${{ env.SHORT_SHA }}
+
       - name: install argocd cli and sync
         shell: bash
         run: |
           curl -ksSL -o argocd https://${{ vars.ARGOCD_HOST }}/download/argocd-linux-${{ vars.HOST_ARCH }}
           chmod +x argocd
           sudo mv ./argocd /usr/local/bin/argocd
-          export PATH=$PATH:/usr/local/bin
 
       - name: argocd app sync
         shell: bash
