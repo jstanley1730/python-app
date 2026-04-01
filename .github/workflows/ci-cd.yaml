@@ -40,9 +40,15 @@ jobs:
       - name: install argocd cli and sync
         shell: bash
         run: |
-          curl -ksSL -o argocd ${{ vars.ARGOCD_HOST }}/download/argocd-linux-amd64
+          curl -ksSL -o argocd ${{ vars.ARGOCD_HOST }}/download/argocd-linux-${{ vars.HOST_ARCH }}
           chmod +x argocd
+          sudo mv ./argocd /usr/local/bin/argocd
+          export PATH=$PATH:/usr/local/bin
           argocd version
+
+      - name: argocd app sync
+        shell: bash
+        run: |
           argocd login ${{ vars.ARGOCD_HOST }} \
           --insecure \
           --grpc-web \
@@ -50,5 +56,3 @@ jobs:
           --password ${{ secrets.ARGOCD_PASSWORD }}
           argocd app sync ${{ vars.ARGOCD_APP }}
 
-# sudo mv ./argocd /usr/local/bin/argocd
-# export PATH=$PATH:/usr/local/bin
