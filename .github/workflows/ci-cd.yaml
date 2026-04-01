@@ -56,4 +56,4 @@ jobs:
       - name: argocd app sync
         shell: bash
         run: |
-          argocd app sync ${{ secrets.ARGOCD_APP }}
+          argocd app sync ${{ vars.ARGOCD_APP }}
