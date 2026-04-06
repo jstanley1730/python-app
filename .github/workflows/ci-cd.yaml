@@ -43,6 +43,8 @@ jobs:
         shell: bash
         run: |
           echo ${{ env.SHORT_SHA }}
+          pip install yq
+          yq -Yi '.image.tag = "${{ env.SHORT_SHA }}"' charts/chart/values.yaml
 
       - name: install argocd cli and sync
         shell: bash
