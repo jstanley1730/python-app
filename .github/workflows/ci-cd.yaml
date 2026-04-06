@@ -39,12 +39,21 @@ jobs:
     env:
       SHORT_SHA: ${{ needs.ci.outputs.short_sha }}
     steps:
+
+      - name: Clone repo
+        uses: actions/checkout@v3
+
       - name: update values with generated image tag
         shell: bash
         run: |
           echo ${{ env.SHORT_SHA }}
           pip install yq
           yq -Yi '.image.tag = "${{ env.SHORT_SHA }}"' charts/chart/values.yaml
+
+      - name: commit tag
+        uses: EndBug/add-and-commit@v9
+        with:
+          message: 'Updates values.yaml with commit ${{ env.SHORT_SHA }}'
 
       - name: install argocd cli and sync
         shell: bash
