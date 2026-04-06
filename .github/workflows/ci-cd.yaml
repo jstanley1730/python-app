@@ -43,11 +43,12 @@ jobs:
       - name: Clone repo
         uses: actions/checkout@v3
 
-      - name: update values with generated image tag
+      - name: install yq
         shell: bash
         run: |
           echo ${{ env.SHORT_SHA }}
-          pip install yq
+          sudo apt install python3-pip
+          sudo apt install yq
           yq -Yi '.image.tag = "${{ env.SHORT_SHA }}"' charts/chart/values.yaml
 
       - name: commit tag
